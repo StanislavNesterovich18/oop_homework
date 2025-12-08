@@ -45,7 +45,7 @@ if __name__ == "__main__":
     print(Category.category_count)
     print(Category.product_count)
 
-    with open(ROOT_DIR + "\data\products.json", "r", encoding="utf-8") as f:
+    with open(ROOT_DIR + "/data/products.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
     category_list: list[Category] = []

@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_products_category(product_category):
     assert product_category.products[0].name == "Samsung Galaxy S23 Ultra"
     assert product_category.products[1].name == "Iphone 15"
