@@ -1,6 +1,6 @@
-import json
-
-from config import ROOT_DIR
+# import json
+#
+# from config import ROOT_DIR
 from src.product_category import Product, Category
 
 # if __name__ == "__main__":

@@ -10,21 +10,6 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
-    @property
-    def new_price(self):
-        return self.__price
-
-    @new_price.setter
-    def price(self, new_price):
-        if new_price <= 0:
-            print("Цена не должна быть нулевая или отрицательная")
-        elif new_price < self.__price:
-            confirm = input("Цена товара понижается. Подтвердите изменение (y/n): ")
-            if confirm.lower() == 'y':
-                self.__price = new_price
-        else:
-            self.__price = new_price
-
     @classmethod
     def new_product(cls, product_info, existing_products):
         new_product = cls(**product_info)
@@ -37,6 +22,21 @@ class Product:
 
         existing_products.append(new_product)
         return new_product
+
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self, new_price):
+        if new_price <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+        elif new_price < self.__price:
+            confirm = input("Цена товара понижается. Подтвердите изменение (y/n): ")
+            if confirm.lower() == 'y':
+                self.__price = new_price
+        else:
+            self.__price = new_price
 
 
 class Category:
