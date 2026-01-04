@@ -28,7 +28,7 @@
 ├── .flake8
 ├── .gitignore
 ├── config.py
-├── main.py
+├── main.py                  
 ├── poetry.lock
 ├── pyproject.toml
 ├── README.md                 # Описание проекта
