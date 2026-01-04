@@ -31,5 +31,5 @@ def test_update_existing_product(existing_products):
     existing_info = {"name": "Samsung Galaxy S23 Ultra", "description": "256GB, Серый цвет, 200MP камера",
                      "price": 170000.0, "quantity": 2}
     updated_product = Product.new_product(existing_info, existing_products)
-    assert updated_product.quantity == 7  # Проверяем, что количество обновлено
+    assert updated_product.quantity == 7
     assert updated_product.price == 180000.0
