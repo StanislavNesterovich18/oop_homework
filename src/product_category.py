@@ -13,13 +13,6 @@ class Product:
     @classmethod
     def new_product(cls, product_info, existing_products):
         new_product = cls(**product_info)
-
-        for product in existing_products:
-            if product.name == new_product.name:
-                product.quantity += new_product.quantity
-                product.price = max(product.price, new_product.price)
-                return product
-
         existing_products.append(new_product)
         return new_product
 
