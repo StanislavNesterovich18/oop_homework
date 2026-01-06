@@ -32,3 +32,27 @@ def test_update_existing_product(product_category):
     updated_product = Product.new_product(existing_info)
     assert updated_product.quantity == 2
     assert updated_product.price == 170000.0
+
+
+def test_add(product_category):
+    assert (
+                   (product_category._Category__products[0].price * product_category._Category__products[0].quantity) +
+                   (product_category._Category__products[2].price * product_category._Category__products[2].quantity)
+           ) == 1334000
+    assert (
+                   (product_category._Category__products[1].price * product_category._Category__products[1].quantity) +
+                   (product_category._Category__products[2].price * product_category._Category__products[2].quantity)
+           ) == 2114000
+    assert (
+                   (product_category._Category__products[0].price * product_category._Category__products[0].quantity) +
+                   (product_category._Category__products[1].price * product_category._Category__products[1].quantity)
+           ) == 2580000
+
+
+def test_str(product_category):
+    product = str(product_category._Category__products[0])
+    product1 = str(product_category._Category__products[1])
+    product2 = str(product_category._Category__products[2])
+    assert product == "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт."
+    assert product1 == "Iphone 15, 210000.0 руб. Остаток: 8 шт."
+    assert product2 == "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14 шт."
