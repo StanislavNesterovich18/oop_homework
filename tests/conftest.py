@@ -12,5 +12,3 @@ def product_category():
                                       " но и получения дополнительных функций для удобства жизни",
                          [product1, product2, product3, product4])
     return category1
-
-

@@ -2,7 +2,7 @@ class Product:
     name: str
     description: str
     price: float
-    quantity: str
+    quantity: int
 
     def __init__(self, name, description, price, quantity):
         self.name = name
@@ -29,6 +29,9 @@ class Product:
                 self.__price = new_price
         else:
             self.__price = new_price
+
+    def __add__(self, other):
+        return (self.__price * self.quantity) + (other.__price * other.quantity)
 
 
 class Category:
