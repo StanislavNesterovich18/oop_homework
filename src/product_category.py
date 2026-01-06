@@ -11,9 +11,8 @@ class Product:
         self.quantity = quantity
 
     @classmethod
-    def new_product(cls, product_info, existing_products):
+    def new_product(cls, product_info):
         new_product = cls(**product_info)
-        existing_products.append(new_product)
         return new_product
 
     @property
