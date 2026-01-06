@@ -49,5 +49,10 @@ class Category:
             [f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт." for product in self.__products]
         )
 
+    def __str__(self):
+        return "\n".join(
+            [f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт." for product in self.__products]
+        )
+
     def add_product(self, product):
         self.__products.append(product)
