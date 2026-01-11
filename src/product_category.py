@@ -35,10 +35,8 @@ class Product:
 
     def __add__(self, other):
         if isinstance(other, self.__class__):
-            return self.quantity + other.quantity
             return (self.__price * self.quantity) + (other.__price * other.quantity)
-
-        raise TypeError("Нельзя добовлять товары разных категорий.")
+        raise TypeError("Нельзя добавлять товары разных категорий.")
 
 
 class Category:
@@ -48,10 +46,12 @@ class Category:
     def __init__(self, name: str, description: str, products: list[Product]):
         self.name = name
         self.description = description
-        self.__products = products
         self.__products = products if products else []
         Category.category_count += 1
         Category.product_count += len(products) if products else 0
+
+    def __len__(self):
+        return len(self.__products)
 
     @property
     def products(self):
@@ -80,7 +80,7 @@ class Category:
 
 class Smartphone(Product):
     def __init__(
-        self, name, description, price, quantity, efficiency, model, memory, color
+            self, name, description, price, quantity, efficiency, model, memory, color
     ):
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency  # производительность
@@ -91,7 +91,7 @@ class Smartphone(Product):
 
 class LawnGrass(Product):
     def __init__(
-        self, name, description, price, quantity, country, germination_period, color
+            self, name, description, price, quantity, country, germination_period, color
     ):
         super().__init__(name, description, price, quantity)
         self.country = country  # страна
