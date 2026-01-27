@@ -3,7 +3,7 @@ from io import StringIO
 
 import pytest
 
-from src.product_category import Category, Product, Smartphone, LawnGrass
+from src.product_category import Category, LawnGrass, Product, Smartphone
 
 
 def test_products_category(product_category) -> None:
@@ -50,35 +50,35 @@ def test_update_existing_product(product_category) -> None:
 
 def test_add(product_category) -> None:
     assert (
-                   (
-                           product_category._Category__products[0].price
-                           * product_category._Category__products[0].quantity
-                   )
-                   + (
-                           product_category._Category__products[2].price
-                           * product_category._Category__products[2].quantity
-                   )
-           ) == 1334000
+        (
+            product_category._Category__products[0].price
+            * product_category._Category__products[0].quantity
+        )
+        + (
+            product_category._Category__products[2].price
+            * product_category._Category__products[2].quantity
+        )
+    ) == 1334000
     assert (
-                   (
-                           product_category._Category__products[1].price
-                           * product_category._Category__products[1].quantity
-                   )
-                   + (
-                           product_category._Category__products[2].price
-                           * product_category._Category__products[2].quantity
-                   )
-           ) == 2114000
+        (
+            product_category._Category__products[1].price
+            * product_category._Category__products[1].quantity
+        )
+        + (
+            product_category._Category__products[2].price
+            * product_category._Category__products[2].quantity
+        )
+    ) == 2114000
     assert (
-                   (
-                           product_category._Category__products[0].price
-                           * product_category._Category__products[0].quantity
-                   )
-                   + (
-                           product_category._Category__products[1].price
-                           * product_category._Category__products[1].quantity
-                   )
-           ) == 2580000
+        (
+            product_category._Category__products[0].price
+            * product_category._Category__products[0].quantity
+        )
+        + (
+            product_category._Category__products[1].price
+            * product_category._Category__products[1].quantity
+        )
+    ) == 2580000
 
 
 def test_str(product_category) -> None:
@@ -132,6 +132,7 @@ def test_category_add_product_type_error():
 
     assert "Можно добавлять только объекты Product" in str(exc_info.value)
 
+
 def test_product_price_property():
     product = Product("Тест", "Описание", 100.0, 5)
     product.price = -50
@@ -144,12 +145,12 @@ def test_product_price_property():
 def test_product_price_decrease_with_confirmation():
     product = Product("Тест", "Описание", 100.0, 5)
 
-    sys.stdin = StringIO('y\n')
+    sys.stdin = StringIO("y\n")
     product.price = 80.0
     assert product.price == 80.0
 
     product = Product("Тест", "Описание", 100.0, 5)
-    sys.stdin = StringIO('n\n')
+    sys.stdin = StringIO("n\n")
     product.price = 80.0
     assert product.price == 100.0
 
@@ -175,7 +176,7 @@ def test_lawn_grass_creation():
         quantity=100,
         country="Россия",
         germination_period="14 дней",
-        color="Зеленый"
+        color="Зеленый",
     )
 
     assert grass.name == "Трава газонная"
@@ -184,7 +185,6 @@ def test_lawn_grass_creation():
     assert grass.germination_period == "14 дней"
     assert grass.color == "Зеленый"
     assert isinstance(grass, Product)
-
 
 
 def test_product_inheritance_in_category():
@@ -198,7 +198,7 @@ def test_product_inheritance_in_category():
         efficiency="Средняя",
         model="Galaxy S23",
         memory="128GB",
-        color="White"
+        color="White",
     )
 
     grass = LawnGrass(
@@ -208,9 +208,8 @@ def test_product_inheritance_in_category():
         quantity=50,
         country="Россия",
         germination_period="10 дней",
-        color="Зеленый"
+        color="Зеленый",
     )
-
 
     category.add_product(smartphone)
     category.add_product(grass)
