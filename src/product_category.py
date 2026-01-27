@@ -28,10 +28,7 @@ class PrintMixin:
         return f"{self.__class__.__name__}({self.name},{self.description},{self.price},{self.quantity})"
 
 
-class Product(
-    BaseProduct,
-    PrintMixin,
-):
+class Product(BaseProduct, PrintMixin):
 
     def __init__(self, name, description, price, quantity):
         super().__init__(name, description, price, quantity)
@@ -107,7 +104,7 @@ class Category:
 
 class Smartphone(Product):
     def __init__(
-        self, name, description, price, quantity, efficiency, model, memory, color
+            self, name, description, price, quantity, efficiency, model, memory, color
     ):
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency  # производительность
@@ -118,7 +115,7 @@ class Smartphone(Product):
 
 class LawnGrass(Product):
     def __init__(
-        self, name, description, price, quantity, country, germination_period, color
+            self, name, description, price, quantity, country, germination_period, color
     ):
         super().__init__(name, description, price, quantity)
         self.country = country  # страна
