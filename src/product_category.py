@@ -1,14 +1,35 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class BaseProduct(ABC):
     name: str
     description: str
     price: float
     quantity: int
 
+    @abstractmethod
     def __init__(self, name, description, price, quantity):
         self.name = name  # имя
         self.description = description  # описание
         self.__price = price  # цена
         self.quantity = quantity  # количество
+
+
+class PrintMixin:
+
+    def __init__(self):
+        super().__init__()
+        print(repr(self))
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.name},{self.description},{self.price},{self.quantity})"
+
+
+class Product(BaseProduct, PrintMixin,):
+
+    def __init__(self, name, description, price, quantity):
+        super().__init__(name, description, price, quantity)
+        self.__price = price  # цена
 
     @classmethod
     def new_product(cls, product_info):
