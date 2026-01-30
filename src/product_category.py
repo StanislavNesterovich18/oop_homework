@@ -2,13 +2,10 @@ from abc import ABC, abstractmethod
 
 
 class BaseProduct(ABC):
-    name: str
-    description: str
-    price: float
-    quantity: int
-
     @abstractmethod
     def __init__(self, name, description, price, quantity):
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.name = name  # имя
         self.description = description  # описание
         self.__price = price  # цена
@@ -16,16 +13,19 @@ class BaseProduct(ABC):
 
 
 class PrintMixin:
+    name: str
+    description: str
+    price: float
+    quantity: int
 
     def __init__(self):
         super().__init__()
-        print(repr(self))
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.name},{self.description},{self.price},{self.quantity})"
 
 
-class Product(BaseProduct, PrintMixin,):
+class Product(BaseProduct, PrintMixin):
 
     def __init__(self, name, description, price, quantity):
         super().__init__(name, description, price, quantity)
@@ -42,14 +42,19 @@ class Product(BaseProduct, PrintMixin,):
 
     @price.setter
     def price(self, new_price):
-        if new_price <= 0:
-            print("Цена не должна быть нулевая или отрицательная")
-        elif new_price < self.__price:
-            confirm = input("Цена товара понижается. Подтвердите изменение (y/n): ")
-            if confirm.lower() == "y":
+        try:
+            if new_price <= 0:
+                print("Цена не должна быть нулевая или отрицательная")
+            elif new_price < self.__price:
+                confirm = input("Цена товара понижается. Подтвердите изменение (y/n): ")
+                if confirm.lower() == "y":
+                    self.__price = new_price
+            else:
                 self.__price = new_price
-        else:
-            self.__price = new_price
+        except ZeroDivisionError:
+            print("Передайте число больше 0")
+        except TypeError:
+            print("Вы передаёте не правильный формат, передайте число")
 
     def __str__(self):
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
@@ -83,6 +88,16 @@ class Category:
             ]
         )
 
+    def middle_price(self):
+        sum_price: int = 0
+        try:
+            for product in self.__products:
+                sum_price += product.price
+            result = sum_price / len(self.__products)
+            return result
+        except ZeroDivisionError:
+            return 0
+
     def __str__(self):
         total_quantity = sum(product.quantity for product in self.__products)
         return f"{self.name}, количество продуктов: {total_quantity} шт."
@@ -99,9 +114,10 @@ class Category:
         )
 
 
+
 class Smartphone(Product):
     def __init__(
-            self, name, description, price, quantity, efficiency, model, memory, color
+        self, name, description, price, quantity, efficiency, model, memory, color
     ):
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency  # производительность
@@ -112,7 +128,7 @@ class Smartphone(Product):
 
 class LawnGrass(Product):
     def __init__(
-            self, name, description, price, quantity, country, germination_period, color
+        self, name, description, price, quantity, country, germination_period, color
     ):
         super().__init__(name, description, price, quantity)
         self.country = country  # страна
